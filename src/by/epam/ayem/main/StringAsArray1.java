@@ -20,6 +20,7 @@ public class StringAsArray1 {
 
         String[] snakeCaseArray = convertToSnakeCase(camelCaseArray);
 
+        printArray(camelCaseArray);
         printArray(snakeCaseArray);
 
     }
@@ -30,8 +31,29 @@ public class StringAsArray1 {
 
         for (int i = 0; i < array.length; i++) {
 
-            snakeCaseArray[i] = array[i].replaceAll("([a-z])([A-Z])", "$1_$2");
-            snakeCaseArray[i] = snakeCaseArray[i].toLowerCase();
+            char[] letters = array[i].toCharArray();
+            int count = 0;
+
+            for (char letter : letters) {
+                if (letter >= 65 && letter <= 90) {
+                    count++;
+                }
+            }
+
+            char[] replaced = new char[letters.length + count];
+            int offset = 0;
+
+            for (int j = 0; j < letters.length; j++) {
+
+                if (letters[j] >= 65 && letters[j] <= 90) {
+                    replaced[j + offset] = '_';
+                    offset++;
+                    replaced[j + offset] = letters[j] += 32;
+                } else {
+                    replaced[j + offset] = letters[j];
+                }
+            }
+            snakeCaseArray[i] = String.valueOf(replaced);
         }
 
         return snakeCaseArray;
@@ -43,5 +65,18 @@ public class StringAsArray1 {
             System.out.println(item);
         }
     }
+
+//    private static String[] convertToSnakeCase(String[] array) {
+//
+//        String[] snakeCaseArray = new String[array.length];
+//
+//        for (int i = 0; i < array.length; i++) {
+//
+//            snakeCaseArray[i] = array[i].replaceAll("([a-z])([A-Z])", "$1_$2");
+//            snakeCaseArray[i] = snakeCaseArray[i].toLowerCase();
+//        }
+//
+//        return snakeCaseArray;
+//    }
 
 }
