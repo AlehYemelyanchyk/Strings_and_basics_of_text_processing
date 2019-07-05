@@ -6,7 +6,7 @@ public class StringAsObject1 {
 
     public static void main(String[] args) {
 
-        String str = " This       is  the   string   ";
+        String str = " This_    -is7   -the   string   ";
 
         System.out.println(str);
 
@@ -18,32 +18,14 @@ public class StringAsObject1 {
 
         int max = 0;
 
-        String[] strArray = str.split("[\\w]+");
+        String[] strArray = str.split("[\\S]+");
 
         for (String element : strArray) {
-            if (element.length() > max){
+            if (element.length() > max) {
                 max = element.length();
             }
         }
 
         System.out.println("Maximum spaces in a row is " + max);
     }
-
-//    private static void countSpaces(char[] chars) {
-//
-//        int count = 0;
-//        int max = 0;
-//
-//        for (char item : chars) {
-//            if (item == ' '){
-//                count++;
-//            } else {
-//                max = count > max ? count : max;
-//                count = 0;
-//            }
-//        }
-//
-//        System.out.println("Maximum spaces in a row is "+max);
-//    }
-
 }
